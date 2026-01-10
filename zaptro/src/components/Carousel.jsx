@@ -4,9 +4,11 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useEffect } from "react";
 import Catagory from "./Catagory.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Carousel = () => {
   const { data, fetchAllProducts } = getData();
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchAllProducts();
@@ -107,7 +109,7 @@ const Carousel = () => {
                     {item.description}
                   </p>
 
-                  <button className="bg-red-300 text-black px-6 py-2 rounded-full mx-auto md:mx-0 block">
+                  <button onClick={()=>navigate('/products')} className="bg-red-300 text-black px-6 py-2 rounded-full mx-auto md:mx-0 block">
                     Shop Now
                   </button>
                 </div>
