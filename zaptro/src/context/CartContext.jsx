@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export const CartContext = createContext(null);
@@ -6,13 +6,26 @@ export const CartContext = createContext(null);
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
+  // ✅ Load cart from localStorage
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart));
+    }
+  }, []);
+
+  // ✅ Save cart to localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   // ✅ Add to cart
   const addToCart = (product) => {
     setCartItems((prev) => {
       const itemInCart = prev.find((item) => item.id === product.id);
 
       if (itemInCart) {
-        toast.info("Item quantity increased");
+        toast.info("Quantity increased");
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
@@ -40,12 +53,10 @@ export const CartProvider = ({ children }) => {
 
             if (action === "decrement") {
               newQty -= 1;
-
               if (newQty === 0) {
-                toast.error("Item removed from cart");
+                toast.error("Item removed");
                 return null;
               }
-
               toast.info("Quantity decreased");
             }
 
