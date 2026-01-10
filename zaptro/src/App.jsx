@@ -10,6 +10,9 @@ import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SingleProduct from "./pages/SingleProduct";
+import "react-toastify/dist/ReactToastify.css";
+import CategoryProduct from "./pages/CategoryProduct";
+
 
 const App = () => {
   const [location, setLocation] = useState(null);
@@ -24,11 +27,8 @@ const App = () => {
       async (position) => {
         try {
           const { latitude, longitude } = position.coords;
-
           const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
-
           const res = await axios.get(url);
-
           setLocation(res.data); // full location object
         } catch (error) {
           console.log("Error fetching location data:", error);
@@ -53,6 +53,7 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path="/about" element={<About />} />
+        <Route path="/category/:category" element={<CategoryProduct />} />
         <Route path="/contact" element={<Contact />} />
         <Route
           path="/cart"
