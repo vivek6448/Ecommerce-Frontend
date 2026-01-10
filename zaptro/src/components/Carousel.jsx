@@ -91,7 +91,7 @@ const Carousel = () => {
           return (
             <div
               key={index}
-              className="bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e]"
+              className="bg-gradient-to-r from-[#2c0a0a] via-[#7a1c1c] to-[#3a0f1a]"
             >
               <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-10 justify-center items-center px-4 py-8 md:py-10 min-h-[420px] md:min-h-[600px]">
                 <div className="space-y-3 md:space-y-6 text-center md:text-left px-2">
@@ -107,7 +107,7 @@ const Carousel = () => {
                     {item.description}
                   </p>
 
-                  <button className="bg-gradient-to-r from-red-500 to-purple-500 text-white px-6 py-2 rounded-full mx-auto md:mx-0 block">
+                  <button className="bg-red-300 text-black px-6 py-2 rounded-full mx-auto md:mx-0 block">
                     Shop Now
                   </button>
                 </div>

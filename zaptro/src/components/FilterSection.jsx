@@ -16,7 +16,7 @@ const FilterSection = ({
   const { categoryOnlyData, brandOnlyData } = getData();
 
   return (
-    <div className="bg-gray-100 mt-4 md:mt-10 p-3 sm:p-4 rounded-md h-max w-full md:w-[260px] block md:block">
+    <div className="bg-gray-100 mt-4 md:mt-10 p-3 sm:p-4 rounded-md h-max w-full md:w-[260px]">
       <input
         type="text"
         placeholder="Search"
@@ -28,57 +28,57 @@ const FilterSection = ({
       <h1 className="mt-4 sm:mt-5 font-semibold text-base sm:text-lg">
         Category
       </h1>
+
       <div className="flex flex-col gap-2 mt-2 sm:mt-3">
         {categoryOnlyData?.map((item, index) => (
-          <div key={index} className="flex gap-2 items-center">
+          <label key={index} className="flex gap-2 items-center cursor-pointer">
             <input
-              type="checkbox"
-              name={item}
+              type="radio"
+              name="category"
+              value={item}
               checked={category === item}
               onChange={handlecategoryChange}
-              value={item}
               className="accent-red-500"
             />
-            <button className="cursor-pointer uppercase text-xs sm:text-sm">
-              {item}
-            </button>
-          </div>
+            <span className="uppercase text-xs sm:text-sm">{item}</span>
+          </label>
         ))}
       </div>
 
       <h1 className="mt-4 sm:mt-5 font-semibold text-base sm:text-lg mb-2 sm:mb-3">
         Brand
       </h1>
+
       <select
         value={brand}
         onChange={handleBrandChange}
         className="bg-white w-full p-2 border border-gray-300 rounded-md text-sm sm:text-base"
       >
-        {brandOnlyData?.map((item, index) => {
-          return (
-            <option value={item} key={index}>
-              {item}
-            </option>
-          );
-        })}
+        {brandOnlyData?.map((item, index) => (
+          <option value={item} key={index}>
+            {item}
+          </option>
+        ))}
       </select>
 
       <h1 className="mt-4 sm:mt-5 font-semibold text-base sm:text-lg mb-2 sm:mb-3">
         Price Range
       </h1>
+
       <div className="flex flex-col gap-2">
         <label className="text-xs sm:text-sm">
           Price Range : $ {priceRange[0]} - $ {priceRange[1]}
         </label>
+
         <input
           type="range"
           min="0"
           max="5000"
           step="100"
+          value={priceRange[1]}
           onChange={(e) =>
             setPriceRange([priceRange[0], Number(e.target.value)])
           }
-          value={priceRange[1]}
           className="w-full accent-red-500"
         />
       </div>

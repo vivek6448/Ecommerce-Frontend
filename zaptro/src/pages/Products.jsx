@@ -47,7 +47,7 @@ const Products = () => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 mb-10 font-[Open_Sans]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 mb-10 font-[Open_Sans] ">
         {data?.length > 0 ? (
           <div className="flex flex-col md:flex-row gap-5 md:gap-8">
             <FilterSection
