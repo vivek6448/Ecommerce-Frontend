@@ -9,11 +9,14 @@ import notfound from "../assets/notfound.json";
 
 const Products = () => {
   const { data, fetchAllProducts } = getData();
+
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [brand, setBrand] = useState("All");
   const [priceRange, setPriceRange] = useState([0, 5000]);
   const [page, setPage] = useState(1);
+
+  const [showFilters, setShowFilters] = useState(false);
 
   const handlecategoryChange = (e) => {
     setCategory(e.target.value);
@@ -29,11 +32,16 @@ const Products = () => {
     setPage(selectedPage);
   };
 
+  //  SAFE + CASE INSENSITIVE FILTER
   const filteredData = data?.filter(
     (item) =>
-      item.title.toLowerCase().includes(search.toLowerCase()) &&
-      (category === "All" || item.category === category) &&
-      (brand === "All" || item.brand === brand) &&
+      String(item.title).toLowerCase().includes(search.toLowerCase()) &&
+      (category === "All" ||
+        String(item.category).toLowerCase() ===
+          String(category).toLowerCase()) &&
+      (brand === "All" ||
+        String(item.brand).toLowerCase() ===
+          String(brand).toLowerCase()) &&
       item.price >= priceRange[0] &&
       item.price <= priceRange[1]
   );
@@ -47,22 +55,65 @@ const Products = () => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 mb-10 font-[Open_Sans] ">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 mb-10 font-[Open_Sans]">
         {data?.length > 0 ? (
-          <div className="flex flex-col md:flex-row gap-5 md:gap-8">
-            <FilterSection
-              search={search}
-              setSearch={setSearch}
-              category={category}
-              setCategory={setCategory}
-              handleBrandChange={handleBrandChange}
-              handlecategoryChange={handlecategoryChange}
-              brand={brand}
-              setBrand={setBrand}
-              priceRange={priceRange}
-              setPriceRange={setPriceRange}
-            />
+          <div className="flex flex-col md:flex-row gap-5 md:gap-8 relative">
 
+            {/* MOBILE FILTER BUTTON */}
+            <div className="md:hidden flex justify-end mt-3">
+              <button
+                onClick={() => setShowFilters(true)}
+                className="px-4 py-2 bg-black text-white rounded-md"
+              >
+                ☰ Filters
+              </button>
+            </div>
+
+            {/* DESKTOP FILTER SIDEBAR */}
+            <div className="hidden md:block">
+              <FilterSection
+                search={search}
+                setSearch={setSearch}
+                category={category}
+                handlecategoryChange={handlecategoryChange}
+                brand={brand}
+                handleBrandChange={handleBrandChange}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+              />
+            </div>
+
+            {/* MOBILE FILTER DRAWER */}
+            {showFilters && (
+              <div className="fixed inset-0 bg-black/40 z-50 flex justify-end">
+                <div className="bg-white w-[280px] h-full p-4 overflow-y-auto">
+
+                  <div className="flex justify-between items-center mb-3">
+                    <h2 className="font-bold text-lg">Filters</h2>
+                    <button
+                      onClick={() => setShowFilters(false)}
+                      className="text-xl font-bold"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  <FilterSection
+                    search={search}
+                    setSearch={setSearch}
+                    category={category}
+                    handlecategoryChange={handlecategoryChange}
+                    brand={brand}
+                    handleBrandChange={handleBrandChange}
+                    priceRange={priceRange}
+                    setPriceRange={setPriceRange}
+                    closeMobileFilters={() => setShowFilters(false)}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* PRODUCTS */}
             {filteredData?.length > 0 ? (
               <div className="flex flex-col items-center w-full">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 mt-4 sm:mt-10 w-full">
