@@ -1,13 +1,12 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
-import './Layout.css';
 
 const Layout = ({ children }) => {
   return (
-    <div className="layout">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="layout-main">
+      <main className="flex-1 w-full">
         {children}
       </main>
       <Footer />

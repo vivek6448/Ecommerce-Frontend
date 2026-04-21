@@ -1,21 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import "tailwindcss";
+@import 'tailwindcss';
 
+/* Custom utility overrides */
+.cl-avatarBox {
+  @apply w-8 h-8;
+}
 
-/* clerk user button adjust */
-.cl-avatarBox{
-    width: 2rem;
-    height: 2rem;
-}
-.arrows{
-    height: 40px;
-    width: 40px;
-    margin: 1px;
-}
-input{
-    background-color: white;
-    accent-color: red;
-    border: 1px solid;
-    color: black;
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+  @apply bg-white accent-red-600 border border-gray-300 text-gray-900;
 }
 

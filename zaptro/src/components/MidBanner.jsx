@@ -5,12 +5,8 @@ const MidBanner = () => {
   return (
     <div className="bg-gray-100 py-10 sm:py-14 md:py-24 px-2 sm:px-4">
       <div
-        className="relative max-w-7xl mx-auto rounded-xl md:rounded-2xl pt-24 sm:pt-28 bg-cover bg-center h-[420px] sm:h-[500px] md:h-[600px] overflow-hidden"
-        style={{
-          backgroundImage: `url(${banner})`,
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
+        className="relative max-w-7xl mx-auto rounded-xl md:rounded-2xl pt-24 sm:pt-28 bg-cover bg-center bg-fixed h-[420px] sm:h-[500px] md:h-[600px] overflow-hidden"
+        style={{ backgroundImage: `url(${banner})` }}
       >
         <div className="absolute inset-0 bg-black/60 rounded-xl md:rounded-2xl flex items-center justify-center">
           <div className="text-center text-white px-4 sm:px-6 max-w-2xl">

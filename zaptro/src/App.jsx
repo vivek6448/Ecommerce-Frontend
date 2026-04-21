@@ -12,6 +12,9 @@ import Footer from "./components/Footer";
 import SingleProduct from "./pages/SingleProduct";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryProduct from "./pages/CategoryProduct";
+import ErrorBoundary from "./components/common/ErrorBoundary";
+import NotFound from "./components/common/NotFound";
+import { ROUTES } from "./routes/routeConfig";
 
 
 const App = () => {
@@ -45,24 +48,26 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      {/* PASS LOCATION TO NAVBAR */}
-      <Navbar location={location} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<SingleProduct />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/category/:category" element={<CategoryProduct />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route
-          path="/cart"
-          element={<Cart location={location} getLocation={getLocation} />}
-        />
-      </Routes>
-      <Footer />
-      <ToastContainer position="top-right" autoClose={2000} />
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Navbar location={location} />
+        <Routes>
+          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route path={ROUTES.PRODUCTS} element={<Products />} />
+          <Route path={ROUTES.PRODUCT_DETAIL} element={<SingleProduct />} />
+          <Route path={ROUTES.ABOUT} element={<About />} />
+          <Route path={ROUTES.CATEGORY} element={<CategoryProduct />} />
+          <Route path={ROUTES.CONTACT} element={<Contact />} />
+          <Route
+            path={ROUTES.CART}
+            element={<Cart location={location} getLocation={getLocation} />}
+          />
+          <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+        </Routes>
+        <Footer />
+        <ToastContainer position="top-right" autoClose={2000} />
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 };
 

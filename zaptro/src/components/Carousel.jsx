@@ -14,32 +14,19 @@ const Carousel = () => {
     fetchAllProducts();
   }, []);
 
+  const arrowClasses =
+    "flex items-center justify-center w-10 h-10 rounded-full absolute z-10 text-white text-3xl font-black p-0 m-px cursor-pointer transition-all duration-[250ms]";
+  const arrowStyle = {
+    background: "linear-gradient(135deg, #6a11cb, #2575fc)",
+    boxShadow: "0 6px 14px rgba(0,0,0,0.3)",
+  };
+
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
       <div
-        className={className}
-        style={{
-          ...style,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "40px",
-          height: "40px",
-          background: "linear-gradient(135deg, #6a11cb, #2575fc)",
-          borderRadius: "50%",
-          right: "10px",
-          position: "absolute",
-          zIndex: 10,
-          color: "#fff",
-          fontSize: "30px",
-          fontWeight: "900",
-          padding: "0",
-          margin: "1px",
-          boxShadow: "0 6px 14px rgba(0,0,0,0.3)",
-          cursor: "pointer",
-          transition: "all 0.25s ease",
-        }}
+        className={`${className} ${arrowClasses} right-[10px]`}
+        style={{ ...style, ...arrowStyle }}
         onClick={onClick}
       />
     );
@@ -49,25 +36,8 @@ const Carousel = () => {
     const { className, style, onClick } = props;
     return (
       <div
-        className={className}
-        style={{
-          ...style,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "40px",
-          height: "40px",
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #6a11cb, #2575fc)",
-          color: "#fff",
-          fontSize: "30px",
-          fontWeight: "900",
-          left: "10px",
-          cursor: "pointer",
-          boxShadow: "0 6px 16px rgba(0,0,0,0.3)",
-          transition: "all 0.25s ease",
-          zIndex: 10,
-        }}
+        className={`${className} ${arrowClasses} left-[10px]`}
+        style={{ ...style, ...arrowStyle }}
         onClick={onClick}
       />
     );

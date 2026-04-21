@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from '../components/layout/Layout';
+import MainLayout from '../layouts/MainLayout';
+import NotFound from '../components/common/NotFound';
+import { ROUTES } from './routeConfig';
 import Home from '../pages/Home';
 import Products from '../pages/Products';
 import SingleProduct from '../pages/SingleProduct';
@@ -11,18 +13,18 @@ import Contact from '../pages/Contact';
 export const AppRoutes = () => {
   return (
     <Router>
-      <Layout>
+      <MainLayout>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<SingleProduct />} />
-          <Route path="/category/:name" element={<CategoryProduct />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<div>Page not found</div>} />
+          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route path={ROUTES.PRODUCTS} element={<Products />} />
+          <Route path={ROUTES.PRODUCT_DETAIL} element={<SingleProduct />} />
+          <Route path={ROUTES.CATEGORY} element={<CategoryProduct />} />
+          <Route path={ROUTES.CART} element={<Cart />} />
+          <Route path={ROUTES.ABOUT} element={<About />} />
+          <Route path={ROUTES.CONTACT} element={<Contact />} />
+          <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
         </Routes>
-      </Layout>
+      </MainLayout>
     </Router>
   );
 };
