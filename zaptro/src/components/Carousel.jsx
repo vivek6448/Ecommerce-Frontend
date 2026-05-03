@@ -1,4 +1,4 @@
-import { getData } from "../context/DataContext.jsx";
+import { useData } from "../context/DataContext.jsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -6,44 +6,42 @@ import { useEffect } from "react";
 import Catagory from "./Catagory.jsx";
 import { useNavigate } from "react-router-dom";
 
+const arrowClasses =
+  "flex items-center justify-center w-10 h-10 rounded-full absolute z-10 text-white text-3xl font-black p-0 m-px cursor-pointer transition-all duration-[250ms]";
+const arrowStyle = {
+  background: "linear-gradient(135deg, #6a11cb, #2575fc)",
+  boxShadow: "0 6px 14px rgba(0,0,0,0.3)",
+};
+
+function SampleNextArrow({ className, style, onClick }) {
+  return (
+    <div
+      className={`${className} ${arrowClasses} right-[10px]`}
+      style={{ ...style, ...arrowStyle }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow({ className, style, onClick }) {
+  return (
+    <div
+      className={`${className} ${arrowClasses} left-[10px]`}
+      style={{ ...style, ...arrowStyle }}
+      onClick={onClick}
+    />
+  );
+}
+
 const Carousel = () => {
-  const { data, fetchAllProducts } = getData();
-  const navigate = useNavigate()
+  const { data, fetchAllProducts } = useData();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchAllProducts();
-  }, []);
+  }, [fetchAllProducts]);
 
-  const arrowClasses =
-    "flex items-center justify-center w-10 h-10 rounded-full absolute z-10 text-white text-3xl font-black p-0 m-px cursor-pointer transition-all duration-[250ms]";
-  const arrowStyle = {
-    background: "linear-gradient(135deg, #6a11cb, #2575fc)",
-    boxShadow: "0 6px 14px rgba(0,0,0,0.3)",
-  };
-
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={`${className} ${arrowClasses} right-[10px]`}
-        style={{ ...style, ...arrowStyle }}
-        onClick={onClick}
-      />
-    );
-  }
-
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={`${className} ${arrowClasses} left-[10px]`}
-        style={{ ...style, ...arrowStyle }}
-        onClick={onClick}
-      />
-    );
-  }
-
-  var settings = {
+  const settings = {
     dots: false,
     autoplay: true,
     autoplaySpeed: 2500,
@@ -59,10 +57,10 @@ const Carousel = () => {
   return (
     <div>
       <Slider {...settings}>
-        {data?.slice(0, 7).map((item, index) => {
+        {data?.slice(0, 7).map((item) => {
           return (
             <div
-              key={index}
+              key={item.id}
               className="bg-gradient-to-r from-[#2c0a0a] via-[#7a1c1c] to-[#3a0f1a]"
             >
               <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-10 justify-center items-center px-4 py-8 md:py-10 min-h-[420px] md:min-h-[600px]">

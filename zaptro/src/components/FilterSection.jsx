@@ -1,5 +1,4 @@
-import React from "react";
-import { getData } from "../context/DataContext";
+import { useData } from "../context/DataContext";
 
 const FilterSection = ({
   search,
@@ -12,7 +11,7 @@ const FilterSection = ({
   handleBrandChange,
   closeMobileFilters,
 }) => {
-  const { categoryOnlyData, brandOnlyData } = getData();
+  const { categoryOnlyData, brandOnlyData } = useData();
 
   return (
     <div className="bg-gray-100 mt-4 md:mt-10 p-3 sm:p-4 rounded-md h-[70vh] w-full md:w-[260px] overflow-y-auto">
@@ -112,7 +111,7 @@ const FilterSection = ({
         onChange={(e) => setPriceRange([0, Number(e.target.value)])}
         className="w-full mt-2 accent-red-500"
       />
-      <p className="text-sm mt-1">₹0 - ₹{priceRange[1]}</p>
+      <p className="text-sm mt-1">$0 - ${priceRange[1]}</p>
 
       {/* APPLY BUTTON (MOBILE ONLY) */}
       {closeMobileFilters && (

@@ -79,12 +79,14 @@ const Cart = ({ location, getLocation }) => {
                 <h1 className="font-bold text-lg">Delivery Info</h1>
 
                 <input
+                  readOnly
                   className="p-2 rounded w-full"
                   value={user?.fullName || ""}
                   placeholder="Full Name"
                 />
 
                 <input
+                  readOnly
                   className="p-2 rounded w-full"
                   value={location?.locality || location?.city || ""}
                   placeholder="Address"
@@ -92,6 +94,7 @@ const Cart = ({ location, getLocation }) => {
 
                 <div className="flex gap-3">
                   <input
+                    readOnly
                     className="p-2 rounded w-full"
                     value={location?.principalSubdivision || ""}
                     placeholder="State"
@@ -106,6 +109,7 @@ const Cart = ({ location, getLocation }) => {
 
                 <div className="flex gap-3">
                   <input
+                    readOnly
                     className="p-2 rounded w-full"
                     value={location?.countryName || ""}
                     placeholder="Country"
@@ -146,7 +150,7 @@ const Cart = ({ location, getLocation }) => {
                 <span className="flex gap-1 items-center">
                   <LuNotebookText /> Items Total
                 </span>
-                <span>${totalPrice}</span>
+                <span>${totalPrice.toFixed(2)}</span>
               </div>
 
               <div className="flex justify-between">
@@ -167,7 +171,7 @@ const Cart = ({ location, getLocation }) => {
 
               <div className="flex justify-between font-bold">
                 <span>Grand Total</span>
-                <span>${totalPrice + 5}</span>
+                <span>${(totalPrice + 5).toFixed(2)}</span>
               </div>
 
               <button className="bg-red-500 text-white py-2 rounded-md w-full mt-3">

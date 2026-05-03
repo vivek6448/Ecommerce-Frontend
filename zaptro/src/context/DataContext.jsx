@@ -1,39 +1,42 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext } from "react";
-import { useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import axios from "axios";
 
-
 export const DataContext = createContext(null);
+
 export const DataProvider = ({ children }) => {
-    const [data, setData] = useState();
+  const [data, setData] = useState();
 
-    //Fetching all Products from Api
-    const fetchAllProducts = async () => {
-        try {
-            const response = await axios.get("https://dummyjson.com/products?limit=150");
-            const productsData = response.data.products;
-            setData(productsData);
-            console.log("response", productsData);
-        } catch (error) {
-            console.log(error)
-        }
+  const fetchAllProducts = useCallback(async () => {
+    if (data) return;
+    try {
+      const response = await axios.get("https://dummyjson.com/products?limit=150");
+      setData(response.data.products);
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
     }
-    const getUniqueCategories = (data, property) => {
-        let newVAL = data?.map((curElem) => {
-            return curElem[property]
-        })
-        return ["All", ...new Set(newVAL)]
-    }
-    const categoryOnlyData = getUniqueCategories(data, "category")
-    console.log(categoryOnlyData);
-    const brandOnlyData = getUniqueCategories(data, "brand")
-    return (
-        <DataContext.Provider value={{ data, setData, fetchAllProducts, categoryOnlyData, brandOnlyData }}>
-            {children}
-        </DataContext.Provider>
-    )
-}
+  }, [data]);
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-export const getData = () => useContext(DataContext);
+  const categoryOnlyData = useMemo(() => {
+    const values = data?.map((item) => item.category) ?? [];
+    return ["All", ...new Set(values)];
+  }, [data]);
+
+  const brandOnlyData = useMemo(() => {
+    const values = data?.map((item) => item.brand).filter(Boolean) ?? [];
+    return ["All", ...new Set(values)];
+  }, [data]);
+
+  const value = useMemo(
+    () => ({ data, setData, fetchAllProducts, categoryOnlyData, brandOnlyData }),
+    [data, fetchAllProducts, categoryOnlyData, brandOnlyData]
+  );
+
+  return (
+    <DataContext.Provider value={value}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+
+export const useData = () => useContext(DataContext);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../assets/Loading4.webm";
 import Breadcrums from "../components/Breadcrums";
@@ -9,23 +9,24 @@ import { useCart } from "../context/CartContext.jsx";
 const SingleProduct = () => {
   const params = useParams();
   const [singleProduct, setSingleProduct] = useState();
+  const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
 
-  const getSingleProduct = async () => {
-    try {
-      const res = await axios.get(
-        `https://dummyjson.com/products/${params.id}`
-      );
-      const product = res.data;
-      setSingleProduct(product);
-    } catch (error) {
-      console.log("Error fetching single product:", error);
-    }
-  };
-
   useEffect(() => {
-    getSingleProduct(params.id);
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`https://dummyjson.com/products/${params.id}`);
+        setSingleProduct(res.data);
+      } catch {
+        // fetch failed — singleProduct stays undefined
+      }
+    };
+    fetchProduct();
   }, [params.id]);
+
+  const handleAddToCart = useCallback(() => {
+    for (let i = 0; i < quantity; i++) addToCart(singleProduct);
+  }, [addToCart, singleProduct, quantity]);
 
   return (
     <>
@@ -68,7 +69,8 @@ const SingleProduct = () => {
                 <input
                   type="number"
                   min={1}
-                  value={1}
+                  value={quantity}
+                  onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
                   className="w-16 sm:w-20 border border-gray-300 rounded-lg px-3 py-1 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
               </div>
@@ -76,7 +78,7 @@ const SingleProduct = () => {
               <div className="flex gap-4 mt-2 sm:mt-4">
                 <button
                   className="text-white px-5 sm:px-6 flex gap-2 py-2 text-sm sm:text-lg bg-red-500 hover:bg-red-600 transition rounded-md w-full sm:w-auto justify-center"
-                  onClick={() => addToCart(singleProduct)}
+                  onClick={handleAddToCart}
                 >
                   <IoCartOutline className="w-5 h-5 sm:w-6 sm:h-6" />
                   Add to Cart

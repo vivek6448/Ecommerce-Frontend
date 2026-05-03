@@ -21,10 +21,7 @@ const App = () => {
   const [location, setLocation] = useState(null);
 
   const getLocation = () => {
-    if (!navigator.geolocation) {
-      console.log("Geolocation not supported");
-      return;
-    }
+    if (!navigator.geolocation) return;
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -32,13 +29,13 @@ const App = () => {
           const { latitude, longitude } = position.coords;
           const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
           const res = await axios.get(url);
-          setLocation(res.data); // full location object
-        } catch (error) {
-          console.log("Error fetching location data:", error);
+          setLocation(res.data);
+        } catch {
+          // geolocation fetch failed silently
         }
       },
-      (error) => {
-        console.log("Location permission denied", error);
+      () => {
+        // permission denied — location stays null
       }
     );
   };

@@ -1,5 +1,5 @@
-import { getData } from "../context/DataContext";
-import { useEffect, useState } from "react";
+import { useData } from "../context/DataContext";
+import { useEffect, useMemo, useState } from "react";
 import FilterSection from "../components/FilterSection";
 import Loading from "../assets/Loading4.webm";
 import ProductCard from "../components/ProductCard";
@@ -8,7 +8,7 @@ import Lottie from "lottie-react";
 import notfound from "../assets/notfound.json";
 
 const Products = () => {
-  const { data, fetchAllProducts } = getData();
+  const { data, fetchAllProducts } = useData();
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
@@ -32,26 +32,27 @@ const Products = () => {
     setPage(selectedPage);
   };
 
-  //  SAFE + CASE INSENSITIVE FILTER
-  const filteredData = data?.filter(
-    (item) =>
-      String(item.title).toLowerCase().includes(search.toLowerCase()) &&
-      (category === "All" ||
-        String(item.category).toLowerCase() ===
-          String(category).toLowerCase()) &&
-      (brand === "All" ||
-        String(item.brand).toLowerCase() ===
-          String(brand).toLowerCase()) &&
-      item.price >= priceRange[0] &&
-      item.price <= priceRange[1]
+  const filteredData = useMemo(
+    () =>
+      data?.filter(
+        (item) =>
+          String(item.title).toLowerCase().includes(search.toLowerCase()) &&
+          (category === "All" ||
+            String(item.category).toLowerCase() === String(category).toLowerCase()) &&
+          (brand === "All" ||
+            String(item.brand).toLowerCase() === String(brand).toLowerCase()) &&
+          item.price >= priceRange[0] &&
+          item.price <= priceRange[1]
+      ),
+    [data, search, category, brand, priceRange]
   );
 
-  const dynamicPage = Math.ceil(filteredData?.length / 8);
+  const dynamicPage = Math.ceil((filteredData?.length ?? 0) / 8);
 
   useEffect(() => {
     fetchAllProducts();
     window.scrollTo(0, 0);
-  }, []);
+  }, [fetchAllProducts]);
 
   return (
     <div>
