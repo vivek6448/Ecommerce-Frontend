@@ -38,6 +38,9 @@ const Cart = ({ location, getLocation }) => {
                   <img
                     src={item.thumbnail}
                     alt={item.title}
+                    loading="lazy"
+                    width={80}
+                    height={80}
                     className="w-20 h-20 object-cover rounded-md"
                   />
                   <div className="flex-1">
@@ -186,7 +189,13 @@ const Cart = ({ location, getLocation }) => {
             Your Cart is Empty
           </h1>
 
-          <img src={emptyCart} className="w-56 sm:w-80" />
+          <img
+            src={emptyCart}
+            alt="Your cart is empty"
+            width={320}
+            height={320}
+            className="w-56 sm:w-80"
+          />
 
           <button
             onClick={() => navigate("/products")}

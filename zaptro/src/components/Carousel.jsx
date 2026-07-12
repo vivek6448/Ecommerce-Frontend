@@ -86,6 +86,8 @@ const Carousel = () => {
                   <img
                     src={item.thumbnail}
                     alt={item.title}
+                    width={400}
+                    height={400}
                     className="h-[180px] w-[180px] sm:h-[240px] sm:w-[240px] md:h-[400px] md:w-[400px] object-contain hover:scale-105 transition-transform duration-300 shadow-xl shadow-red-400/40"
                   />
                 </div>

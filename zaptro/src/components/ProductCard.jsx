@@ -16,6 +16,8 @@ const ProductCard = ({ product }) => {
           src={product.thumbnail}
           alt={product.title}
           loading="lazy"
+          width={400}
+          height={400}
           className="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
         />
       </div>

@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { MapPin } from "lucide-react";
 import { FaCaretDown, FaBars } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import {
-  SignedIn,
-  SignedOut,
-  UserButton,
-  SignInButton,
-} from "@clerk/clerk-react";
 import { useCart } from "../context/CartContext.jsx";
+
+const NavAuth = lazy(() => import("./NavAuth"));
 
 const Navbar = ({ location }) => {
   const [open, setOpen] = useState(false);
@@ -73,12 +69,9 @@ const Navbar = ({ location }) => {
             </Link>
 
             <div>
-              <SignedOut>
-                <SignInButton className="bg-red-500 text-white text-[10px] sm:text-xs md:text-sm px-2 sm:px-3 py-1 rounded-md cursor-pointer hover:bg-red-600 transition" />
-              </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
+              <Suspense fallback={null}>
+                <NavAuth />
+              </Suspense>
             </div>
 
             <button

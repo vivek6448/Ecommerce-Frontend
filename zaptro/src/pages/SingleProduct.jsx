@@ -39,6 +39,8 @@ const SingleProduct = () => {
               <img
                 src={singleProduct.thumbnail}
                 alt={singleProduct.title}
+                width={500}
+                height={500}
                 className="rounded-xl sm:rounded-2xl w-full max-w-md md:max-w-full object-cover"
               />
             </div>

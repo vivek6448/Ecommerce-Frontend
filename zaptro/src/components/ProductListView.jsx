@@ -13,6 +13,9 @@ export default function ProductListView({ product }) {
         <img
           src={product.thumbnail}
           alt={product.title}
+          loading="lazy"
+          width={240}
+          height={240}
           className="
             w-full h-48
             sm:w-60 sm:h-60
