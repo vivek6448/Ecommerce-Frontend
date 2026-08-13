@@ -16,7 +16,7 @@ const Loader = ({ size = 'md', fullscreen = false }) => {
       <div
         className={`border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin ${sizeClasses}`}
       ></div>
-      <p className="text-gray-700">Loading...</p>
+      <p className="text-gray-300">Loading...</p>
     </div>
   );
 };

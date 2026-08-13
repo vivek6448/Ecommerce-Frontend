@@ -1,4 +1,4 @@
-import { useData } from "../context/DataContext";
+import { useData } from "../context/useData";
 import { useEffect, useMemo, useState } from "react";
 import FilterSection from "../components/FilterSection";
 import Loading from "../assets/Loading4.webm";
@@ -56,7 +56,7 @@ const Products = () => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 mb-10 font-[Open_Sans]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 pt-4 sm:pt-6 pb-10 font-[Open_Sans]">
         {data?.length > 0 ? (
           <div className="flex flex-col md:flex-row gap-5 md:gap-8 relative">
 
@@ -64,7 +64,7 @@ const Products = () => {
             <div className="md:hidden flex justify-end mt-3">
               <button
                 onClick={() => setShowFilters(true)}
-                className="px-4 py-2 bg-black text-white rounded-md"
+                className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-full transition"
               >
                 ☰ Filters
               </button>
@@ -87,13 +87,13 @@ const Products = () => {
             {/* MOBILE FILTER DRAWER */}
             {showFilters && (
               <div className="fixed inset-0 bg-black/40 z-50 flex justify-end">
-                <div className="bg-white w-[280px] h-full p-4 overflow-y-auto">
+                <div className="bg-[#07170f] w-[280px] h-full p-4 overflow-y-auto">
 
                   <div className="flex justify-between items-center mb-3">
-                    <h2 className="font-bold text-lg">Filters</h2>
+                    <h2 className="font-bold text-lg text-white">Filters</h2>
                     <button
                       onClick={() => setShowFilters(false)}
-                      className="text-xl font-bold"
+                      className="text-xl font-bold text-white"
                     >
                       ✕
                     </button>

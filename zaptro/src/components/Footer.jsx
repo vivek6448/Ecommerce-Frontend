@@ -4,11 +4,11 @@ import { FaFacebook, FaInstagram, FaPinterest, FaTwitterSquare } from 'react-ico
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-200 py-8 sm:py-10">
+    <footer className="border-t border-white/10 text-gray-200 py-8 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
           <Link to="/">
-            <h1 className="text-red-500 text-2xl font-bold">Zaptro</h1>
+            <h1 className="text-green-500 text-2xl font-bold">Zaptro</h1>
           </Link>
           <p className="mt-2 text-sm leading-relaxed">
             Powering Your World with the Best in Electronics.
@@ -48,11 +48,11 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Your email address"
-              className="w-full p-2 text-sm sm:text-base rounded-l-md bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full p-2 text-sm sm:text-base rounded-l-full bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             <button
               type="submit"
-              className="bg-red-600 text-white px-4 text-sm sm:text-base rounded-r-md hover:bg-red-700 transition-colors"
+              className="bg-green-500 text-white px-4 text-sm sm:text-base rounded-r-full hover:bg-green-600 transition"
             >
               Subscribe
             </button>
@@ -63,7 +63,7 @@ const Footer = () => {
       <div className="mt-8 border-t border-gray-700 pt-4 text-center text-xs sm:text-sm">
         <p>
           &copy; {new Date().getFullYear()}{" "}
-          <span className="text-red-500">Zaptro</span>. All rights reserved
+          <span className="text-green-500">Zaptro</span>. All rights reserved
         </p>
       </div>
     </footer>

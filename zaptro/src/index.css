@@ -1,15 +1,16 @@
 @import 'tailwindcss';
 
+body {
+  background: #000000;
+}
+
 /* Custom utility overrides */
 .cl-avatarBox {
   @apply w-8 h-8;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"] {
-  @apply bg-white accent-red-600 border border-gray-300 text-gray-900;
+:where(input[type="text"], input[type="email"], input[type="password"], input[type="number"]) {
+  @apply bg-white accent-green-600 border border-gray-300 text-gray-900;
 }
 
 .scrollbar-hide {

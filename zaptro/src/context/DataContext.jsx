@@ -1,8 +1,6 @@
-/* eslint-disable react-refresh/only-export-components */
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import axios from "axios";
-
-export const DataContext = createContext(null);
+import { DataContext } from "./useData";
 
 export const DataProvider = ({ children }) => {
   const [data, setData] = useState();
@@ -38,5 +36,3 @@ export const DataProvider = ({ children }) => {
     </DataContext.Provider>
   );
 };
-
-export const useData = () => useContext(DataContext);

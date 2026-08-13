@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Loading from "../assets/Loading4.webm";
 import Breadcrums from "../components/Breadcrums";
 import { IoCartOutline } from "react-icons/io5";
-import { useCart } from "../context/CartContext.jsx";
+import { useCart } from "../context/useCart";
 
 const SingleProduct = () => {
   const params = useParams();
@@ -13,15 +13,21 @@ const SingleProduct = () => {
   const { addToCart } = useCart();
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`https://dummyjson.com/products/${params.id}`);
+        const res = await axios.get(`https://dummyjson.com/products/${params.id}`, {
+          signal: controller.signal,
+        });
         setSingleProduct(res.data);
       } catch {
-        // fetch failed — singleProduct stays undefined
+        // fetch failed or aborted — singleProduct stays undefined
       }
     };
     fetchProduct();
+
+    return () => controller.abort();
   }, [params.id]);
 
   const handleAddToCart = useCallback(() => {
@@ -46,26 +52,26 @@ const SingleProduct = () => {
             </div>
 
             <div className="flex flex-col gap-4 sm:gap-6">
-              <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-800">
+              <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-white">
                 {singleProduct.title}
               </h1>
 
-              <div className="text-gray-700 font-semibold text-xs sm:text-sm">
+              <div className="text-gray-300 font-semibold text-xs sm:text-sm">
                 {singleProduct.brand?.toUpperCase()} /{" "}
                 {singleProduct.category?.toUpperCase()} / Stock:{" "}
                 {singleProduct.stock}
               </div>
 
-              <p className="text-lg sm:text-xl font-bold text-red-500">
+              <p className="text-lg sm:text-xl font-bold text-green-400">
                 ${singleProduct.price}
               </p>
 
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
                 {singleProduct.description}
               </p>
 
               <div className="flex items-center gap-3">
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm font-medium text-gray-300">
                   Quantity:
                 </label>
                 <input
@@ -73,13 +79,13 @@ const SingleProduct = () => {
                   min={1}
                   value={quantity}
                   onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
-                  className="w-16 sm:w-20 border border-gray-300 rounded-lg px-3 py-1 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-16 sm:w-20 bg-white/10 border border-white/20 text-white rounded-lg px-3 py-1 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
               </div>
 
               <div className="flex gap-4 mt-2 sm:mt-4">
                 <button
-                  className="text-white px-5 sm:px-6 flex gap-2 py-2 text-sm sm:text-lg bg-red-500 hover:bg-red-600 transition rounded-md w-full sm:w-auto justify-center"
+                  className="text-white px-5 sm:px-6 flex gap-2 py-2 text-sm sm:text-lg bg-green-500 hover:bg-green-600 transition rounded-full w-full sm:w-auto justify-center"
                   onClick={handleAddToCart}
                 >
                   <IoCartOutline className="w-5 h-5 sm:w-6 sm:h-6" />

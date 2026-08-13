@@ -1,4 +1,4 @@
-import { useData } from "../context/DataContext.jsx";
+import { useData } from "../context/useData";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -61,11 +61,11 @@ const Carousel = () => {
           return (
             <div
               key={item.id}
-              className="bg-gradient-to-r from-[#2c0a0a] via-[#7a1c1c] to-[#3a0f1a]"
+              className="bg-black/20"
             >
               <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-10 justify-center items-center px-4 py-8 md:py-10 min-h-[420px] md:min-h-[600px]">
                 <div className="space-y-3 md:space-y-6 text-center md:text-left px-2">
-                  <h3 className="text-red-500 font-semibold text-xs md:text-sm">
+                  <h3 className="text-green-500 font-semibold text-xs md:text-sm">
                     Powering Your World
                   </h3>
 
@@ -77,7 +77,7 @@ const Carousel = () => {
                     {item.description}
                   </p>
 
-                  <button onClick={()=>navigate('/products')} className="bg-red-300 text-black px-6 py-2 rounded-full mx-auto md:mx-0 block">
+                  <button onClick={()=>navigate('/products')} className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full transition mx-auto md:mx-0 block">
                     Shop Now
                   </button>
                 </div>
@@ -88,7 +88,7 @@ const Carousel = () => {
                     alt={item.title}
                     width={400}
                     height={400}
-                    className="h-[180px] w-[180px] sm:h-[240px] sm:w-[240px] md:h-[400px] md:w-[400px] object-contain hover:scale-105 transition-transform duration-300 shadow-xl shadow-red-400/40"
+                    className="h-[180px] w-[180px] sm:h-[240px] sm:w-[240px] md:h-[400px] md:w-[400px] object-contain hover:scale-105 transition-transform duration-300 shadow-xl shadow-green-400/40"
                   />
                 </div>
               </div>

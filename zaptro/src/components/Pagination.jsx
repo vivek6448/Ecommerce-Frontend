@@ -24,8 +24,8 @@ const Pagination = ({ page, pageHandler, dynamicPage }) => {
       <button
         disabled={page === 1}
         className={`${
-          page === 1 ? "bg-red-400 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"
-        } text-white px-3 py-1.5 rounded-md transition`}
+          page === 1 ? "bg-green-400 cursor-not-allowed" : "bg-green-500 hover:bg-green-600"
+        } text-white px-3 py-1.5 rounded-full transition`}
         onClick={() => pageHandler(page - 1)}
       >
         Prev
@@ -34,12 +34,12 @@ const Pagination = ({ page, pageHandler, dynamicPage }) => {
       {getPages(page, dynamicPage)?.map((item, index) => {
         return (
           <span
-            key={index}
+            key={`${item}-${index}`}
             onClick={() => typeof item === "number" && pageHandler(item)}
-            className={`min-w-[32px] text-center px-2 py-1 rounded-md transition ${
+            className={`min-w-[32px] text-center px-2 py-1 rounded-full transition ${
               item === page
-                ? "bg-red-500 text-white font-semibold"
-                : "text-gray-700 hover:bg-gray-200"
+                ? "bg-green-500 text-white font-semibold"
+                : "text-gray-300 hover:bg-white/10"
             } ${typeof item !== "number" ? "cursor-default" : "cursor-pointer"}`}
           >
             {item}
@@ -51,9 +51,9 @@ const Pagination = ({ page, pageHandler, dynamicPage }) => {
         disabled={page === dynamicPage}
         className={`${
           page === dynamicPage
-            ? "bg-red-400 cursor-not-allowed"
-            : "bg-red-500 hover:bg-red-600"
-        } text-white px-3 py-1.5 rounded-md transition`}
+            ? "bg-green-400 cursor-not-allowed"
+            : "bg-green-500 hover:bg-green-600"
+        } text-white px-3 py-1.5 rounded-full transition`}
         onClick={() => pageHandler(page + 1)}
       >
         Next

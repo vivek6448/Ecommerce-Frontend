@@ -1,4 +1,4 @@
-import { useCart } from "../context/CartContext.jsx";
+import { useCart } from "../context/useCart";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { LuNotebookText } from "react-icons/lu";
 import { MdDeliveryDining } from "react-icons/md";
@@ -23,7 +23,7 @@ const Cart = ({ location, getLocation }) => {
     <div className="mt-6 max-w-6xl mx-auto mb-10 px-3 sm:px-4">
       {cartItems.length > 0 ? (
         <div>
-          <h1 className="font-bold text-lg sm:text-2xl">
+          <h1 className="font-bold text-lg sm:text-2xl text-white">
             My Cart ({cartItems.length})
           </h1>
 
@@ -32,7 +32,7 @@ const Cart = ({ location, getLocation }) => {
             {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-gray-100 p-3 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3"
+                className="bg-white/10 backdrop-blur border border-white/10 p-3 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3"
               >
                 <div className="flex items-center gap-3 w-full">
                   <img
@@ -44,15 +44,15 @@ const Cart = ({ location, getLocation }) => {
                     className="w-20 h-20 object-cover rounded-md"
                   />
                   <div className="flex-1">
-                    <h1 className="font-semibold text-sm line-clamp-2">
+                    <h1 className="font-semibold text-sm line-clamp-2 text-white">
                       {item.title}
                     </h1>
-                    <p className="text-red-500 font-bold">${item.price}</p>
+                    <p className="text-green-400 font-bold">${item.price}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between w-full sm:w-auto gap-3">
-                  <div className="bg-red-500 text-white flex gap-4 px-4 py-1.5 rounded-md font-bold">
+                  <div className="bg-green-500 text-white flex gap-4 px-4 py-1.5 rounded-full font-bold">
                     <button onClick={() => updateQuantity(item.id, "decrement")}>
                       -
                     </button>
@@ -63,10 +63,10 @@ const Cart = ({ location, getLocation }) => {
                   </div>
 
                   <span
-                    className="p-2 rounded-full hover:bg-white hover:shadow cursor-pointer"
+                    className="p-2 rounded-full hover:bg-white/10 cursor-pointer"
                     onClick={() => deleteItem(item.id)}
                   >
-                    <FaRegTrashAlt className="text-red-500 text-xl" />
+                    <FaRegTrashAlt className="text-green-400 text-xl" />
                   </span>
                 </div>
               </div>
@@ -78,19 +78,19 @@ const Cart = ({ location, getLocation }) => {
 
             {/* DELIVERY INFO */}
             <SignedIn>
-              <div className="bg-gray-100 rounded-md p-5 space-y-3">
-                <h1 className="font-bold text-lg">Delivery Info</h1>
+              <div className="bg-white/10 backdrop-blur border border-white/10 rounded-md p-5 space-y-3">
+                <h1 className="font-bold text-lg text-white">Delivery Info</h1>
 
                 <input
                   readOnly
-                  className="p-2 rounded w-full"
+                  className="p-2 rounded w-full bg-white/10 border border-white/20 text-white placeholder-gray-400"
                   value={user?.fullName || ""}
                   placeholder="Full Name"
                 />
 
                 <input
                   readOnly
-                  className="p-2 rounded w-full"
+                  className="p-2 rounded w-full bg-white/10 border border-white/20 text-white placeholder-gray-400"
                   value={location?.locality || location?.city || ""}
                   placeholder="Address"
                 />
@@ -98,12 +98,12 @@ const Cart = ({ location, getLocation }) => {
                 <div className="flex gap-3">
                   <input
                     readOnly
-                    className="p-2 rounded w-full"
+                    className="p-2 rounded w-full bg-white/10 border border-white/20 text-white placeholder-gray-400"
                     value={location?.principalSubdivision || ""}
                     placeholder="State"
                   />
                   <input
-                    className="p-2 rounded w-full"
+                    className="p-2 rounded w-full bg-white/10 border border-white/20 text-white placeholder-gray-400"
                     value={postcode}
                     onChange={(e) => setPostcode(e.target.value)}
                     placeholder="Postcode"
@@ -113,20 +113,20 @@ const Cart = ({ location, getLocation }) => {
                 <div className="flex gap-3">
                   <input
                     readOnly
-                    className="p-2 rounded w-full"
+                    className="p-2 rounded w-full bg-white/10 border border-white/20 text-white placeholder-gray-400"
                     value={location?.countryName || ""}
                     placeholder="Country"
                   />
-                  <input className="p-2 rounded w-full" placeholder="Phone" />
+                  <input className="p-2 rounded w-full bg-white/10 border border-white/20 text-white placeholder-gray-400" placeholder="Phone" />
                 </div>
 
-                <button className="bg-red-500 text-white py-2 rounded-md w-full">
+                <button className="bg-green-500 hover:bg-green-600 text-white py-2 rounded-full w-full transition">
                   Submit
                 </button>
 
                 <button
                   onClick={getLocation}
-                  className="bg-red-500 text-white py-2 rounded-md w-full"
+                  className="bg-green-500 hover:bg-green-600 text-white py-2 rounded-full w-full transition"
                 >
                   Detect Location
                 </button>
@@ -140,14 +140,14 @@ const Cart = ({ location, getLocation }) => {
                   Please sign in to continue checkout
                 </p>
                 <div className="mt-4">
-                  <SignInButton className="bg-red-500 text-white px-4 py-2 rounded-md cursor-pointer" />
+                  <SignInButton className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full cursor-pointer transition" />
                 </div>
               </div>
             </SignedOut>
 
             {/* BILLING */}
-            <div className="bg-white shadow-xl rounded-md p-5 space-y-3 h-max">
-              <h1 className="font-bold text-lg">Billing Summary</h1>
+            <div className="bg-white/10 backdrop-blur border border-white/10 rounded-md p-5 space-y-3 h-max text-gray-200">
+              <h1 className="font-bold text-lg text-white">Billing Summary</h1>
 
               <div className="flex justify-between">
                 <span className="flex gap-1 items-center">
@@ -160,7 +160,7 @@ const Cart = ({ location, getLocation }) => {
                 <span className="flex gap-1 items-center">
                   <MdDeliveryDining /> Delivery
                 </span>
-                <span className="text-red-500">Free</span>
+                <span className="text-green-400">Free</span>
               </div>
 
               <div className="flex justify-between">
@@ -170,14 +170,14 @@ const Cart = ({ location, getLocation }) => {
                 <span>$5</span>
               </div>
 
-              <hr />
+              <hr className="border-white/10" />
 
-              <div className="flex justify-between font-bold">
+              <div className="flex justify-between font-bold text-white">
                 <span>Grand Total</span>
                 <span>${(totalPrice + 5).toFixed(2)}</span>
               </div>
 
-              <button className="bg-red-500 text-white py-2 rounded-md w-full mt-3">
+              <button className="bg-green-500 hover:bg-green-600 text-white py-2 rounded-full w-full mt-3 transition">
                 Proceed To Checkout
               </button>
             </div>
@@ -185,7 +185,7 @@ const Cart = ({ location, getLocation }) => {
         </div>
       ) : (
         <div className="flex flex-col gap-3 justify-center items-center min-h-[60vh]">
-          <h1 className="text-red-500 font-bold text-2xl sm:text-4xl">
+          <h1 className="text-green-500 font-bold text-2xl sm:text-4xl">
             Your Cart is Empty
           </h1>
 
@@ -199,7 +199,7 @@ const Cart = ({ location, getLocation }) => {
 
           <button
             onClick={() => navigate("/products")}
-            className="bg-red-500 text-white px-6 py-2 rounded-md"
+            className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full transition"
           >
             Continue Shopping
           </button>

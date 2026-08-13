@@ -2,10 +2,10 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center px-3 sm:px-4 py-8 sm:py-10">
+    <div className="min-h-screen flex items-center justify-center px-3 sm:px-4 py-8 sm:py-10">
       <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-8 md:p-10 w-full max-w-5xl">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-6 sm:mb-10">
-          Get in Touch with <span className="text-red-400">Zaptro</span>
+          Get in Touch with <span className="text-green-400">Zaptro</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
@@ -30,7 +30,7 @@ const Contact = () => {
               <input
                 type="text"
                 placeholder="John Doe"
-                className="w-full px-3 sm:px-4 py-2 bg-white/20 border border-white/30 text-white rounded-lg sm:rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                className="w-full px-3 sm:px-4 py-2 bg-white/20 border border-white/30 text-white rounded-lg sm:rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
               />
             </div>
 
@@ -39,7 +39,7 @@ const Contact = () => {
               <input
                 type="email"
                 placeholder="john@example.com"
-                className="w-full px-3 sm:px-4 py-2 bg-white/20 border border-white/30 text-white rounded-lg sm:rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base"
+                className="w-full px-3 sm:px-4 py-2 bg-white/20 border border-white/30 text-white rounded-lg sm:rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
               />
             </div>
 
@@ -48,13 +48,13 @@ const Contact = () => {
               <textarea
                 rows="4"
                 placeholder="Type your message..."
-                className="w-full px-3 sm:px-4 py-2 bg-white/20 border border-white/30 text-white rounded-lg sm:rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base resize-none"
+                className="w-full px-3 sm:px-4 py-2 bg-white/20 border border-white/30 text-white rounded-lg sm:rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base resize-none"
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-red-300 text-black font-semibold py-2 sm:py-2.5 rounded-lg sm:rounded-xl hover:opacity-90 transition-all duration-300 text-sm sm:text-base"
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 sm:py-2.5 rounded-full transition-all duration-300 text-sm sm:text-base"
             >
               Send Message 🚀
             </button>
